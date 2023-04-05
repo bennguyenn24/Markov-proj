@@ -12,7 +12,7 @@ function generateText(txt) {
 function makeText(path) {
     fs.readFile(path, "utf8", function cb(err,data) {
         if (err) {
-            console.log(`cannot read file: ${path}: ${err}`)
+            console.error(`cannot read file: ${path}: ${err}`)
             process.exit(1);
         } else {
             generateText(data);
@@ -30,3 +30,7 @@ async function makeURL(url){
     }
     generateText(res.data)
 }
+
+process.on('uncaughtException', err => {
+    console.error(`There was an uncaught error: ${err}`);
+})
